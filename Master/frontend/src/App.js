@@ -1,5 +1,21 @@
+import {useState} from 'react'
+import axios from 'axios'
 
 function App() {
+
+  const [inputValue, setInputValue] = useState('')
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    axios.post('/input/', {input: inputValue}).then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+  }
+
   return (
     <div className="flex flex-col justify-center h-screen dark:bg-gray-700">
 
@@ -32,6 +48,8 @@ function App() {
           id="default-search"
           className="text-xl font-jetbrains sm:text-base w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search Code..."
+          value = {inputValue}
+          onChange={event => setInputValue(event.target.value)}
           required
         />
       </div>
