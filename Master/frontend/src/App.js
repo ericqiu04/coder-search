@@ -8,7 +8,9 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = {input_data: inputValue}
-    axios.post('http://localhost:8000/submit/', data)
+    console.log(data)
+    axios.post('http://localhost:8000/', data).then(console.log(data))
+
 
   }
 

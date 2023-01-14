@@ -7,7 +7,7 @@ class InputView(View):
     if request.method == 'POST':
         input_data = request.POST.get('input_data')
         # Do something with input_data
-        print(input_data)
+        print(6)
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error'})
 
