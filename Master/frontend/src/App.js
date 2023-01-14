@@ -9,7 +9,7 @@ function App() {
     event.preventDefault()
     const data = {input_data: inputValue}
     console.log(data)
-    axios.post('http://localhost:8000/', data).then(console.log(data))
+    axios.post('http://localhost:8000/submit/', data).then(console.log(data))
 
 
   }
@@ -21,7 +21,8 @@ function App() {
           <span>&#60;</span> Coder <span>&#62;</span> Search
         </h1>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method = "post">
+
         <div className="mx-auto mt-4 mb-16 relative w-4/6 z-[100]" >
 
           <div className="absolute inset-y-0 1/2 left-0 flex items-center pl-3 pointer-events-none">

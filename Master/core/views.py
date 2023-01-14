@@ -5,6 +5,8 @@ import logging
 
 logger = logging.getLogger('django')
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 class InputView(View):
    def submit(request):
     if request.method == 'POST':
