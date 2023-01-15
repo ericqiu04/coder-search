@@ -1,22 +1,30 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 import logging
 
 logger = logging.getLogger('django')
 
 from django.views.decorators.csrf import csrf_exempt
+
+
+@method_decorator(csrf_exempt)
 @csrf_exempt
-class InputView(View):
-   def submit(request):
+def submit(request):
     if request.method == 'POST':
-        input_data = request.POST.get('input_data')
-        # Do something with input_data
-        return JsonResponse({'status': 'success'})
+        print("work")
+        input_data = request.POST.get('input')
+
+        print(input_data)
+            # Do something with input_dataqw
+        return JsonResponse({'data': input_data})
     return JsonResponse({'status': 'error'})
 
-
 # Create your views here.
+
 def front(request):
     context = { }
     print(10)

@@ -1,17 +1,31 @@
 import { useState } from 'react'
-import axios from 'axios'
+import Axios from 'axios'
+import Cookies from 'react-cookies';
+
 
 function App() {
 
   const [inputValue, setInputValue] = useState('')
+  
+  const data = new FormData()
+  data.append("input", inputValue)
+
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const data = {input_data: inputValue}
-    console.log(data)
-    axios.post('http://localhost:8000/submit/', data).then(console.log(data))
-
-
+    event.preventDefault();
+    Axios.post('/submit-input/', {input_data: inputValue}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.load('csrftoken')
+      }
+    })
+      .then(response => {
+        console.log(inputValue)
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   return (
@@ -21,7 +35,7 @@ function App() {
           <span>&#60;</span> Coder <span>&#62;</span> Search
         </h1>
       </div>
-      <form onSubmit={handleSubmit} method = "post">
+      <form onSubmit={handleSubmit} method="post">
 
         <div className="mx-auto mt-4 mb-16 relative w-4/6 z-[100]" >
 

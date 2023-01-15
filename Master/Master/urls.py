@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import front
-from core.views import InputView
+from core import views
+from django.views import View
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", front, name="front"),
-    path('submit/', InputView.submit, name='submit'),
+    path('submit-input/', views.submit, name='submit-input'),
 ]
