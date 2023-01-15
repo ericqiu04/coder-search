@@ -16,9 +16,12 @@ from django.views.decorators.csrf import csrf_exempt
 def submit(request):
     if request.method == 'POST':
         print("work")
-        input_data = request.POST.get('input')
+        input_data = request.POST.get('input_data')
 
-        print(input_data)
+        if input_data:
+            print(input_data) # You should see the input data here
+        else:
+            print('input_data not found')
             # Do something with input_dataqw
         return JsonResponse({'data': input_data})
     return JsonResponse({'status': 'error'})

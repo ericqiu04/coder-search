@@ -28,6 +28,8 @@ function App() {
       });
   }
 
+
+
   return (
     <div className="flex flex-col justify-center h-screen dark:bg-gray-700">
       <div className="text-center" >
@@ -70,7 +72,9 @@ function App() {
           />
         </div>
       </form>
-
+      <h1>
+        {inputValue}
+      </h1>
     </div>
   );
 }
