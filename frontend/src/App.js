@@ -1,47 +1,94 @@
 // Importing modules
 import React, { useState, useEffect } from "react";
-import "./App.css";
 
 function App() {
-	// usestate for setting a javascript
-	// object for storing and using data
-	const [data, setdata] = useState({
-		name: "",
-		age: 0,
-		date: "", 
-		programming: "",
-	});
+  const [inputValue, setInputValue] = useState('')
+  const [serverResponse, setServerResponse] = useState('');
 
-	// Using useEffect for single rendering
-	useEffect(() => {
-		// Using fetch to fetch the api from
-		// flask server it will be redirected to proxy
-		fetch("/data").then((res) =>
-			res.json().then((data) => {
-				// Setting a data from api
-				setdata({
-					name: data.Name,
-					age: data.Age,
-					date: data.Date,
-					programming: data.programming,
-				});
-			})
-		);
-	}, []);
+  // usestate for setting a javascript
+  // object for storing and using data
+  const [data, setdata] = useState({
+    name: "",
+    age: 0,
+    date: "",
+    programming: "",
+  });
 
-	return (
-		<div className="App">
-			<header className="App-header">
-				<h1>React and flask</h1>
-				{/* Calling a data from setdata for showing */}
-				<p>{data.name}</p>
-				<p>{data.age}</p>
-				<p>{data.date}</p>
-				<p>{data.programming}</p>
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+      // Using fetch to fetch the api from
+      // flask server it will be redirected to proxy
+      fetch('/submit-data', {
+        method: 'POST',
+        body: JSON.stringify({ input: inputValue }),
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setServerResponse(data.input);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
+    
+  // Using useEffect for single rendering
 
-			</header>
-		</div>
-	);
+
+  return (
+    <div className="flex flex-col justify-center h-screen dark:bg-gray-700">
+      <div className="text-center" >
+        <h1 className="sm:text-4xl dark:text-white font-jetbrains z-0 text-lg">
+          <span>&#60;</span> Coder <span>&#62;</span> Search
+        </h1>
+      </div>
+      <form onSubmit={handleSubmit} >
+
+        <div className="mx-auto mt-4 mb-16 relative w-4/6 z-[100]" >
+
+          <div className="absolute inset-y-0 1/2 left-0 flex items-center pl-3 pointer-events-none">
+            <button type="submit">
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+            </button>
+
+          </div>
+          <input
+            type="search"
+            id="default-search"
+            className="text-xl font-jetbrains sm:text-base w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search Code..."
+            value={inputValue}
+            onChange={event => setInputValue(event.target.value)}
+            required
+          />
+        </div>
+      </form>
+      <h1>
+        {inputValue}
+      </h1>
+      <h1>
+        {serverResponse}
+      </h1>
+    </div>
+  );
 }
 
 export default App;
+/*
+  );*/
