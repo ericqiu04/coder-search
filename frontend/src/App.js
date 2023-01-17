@@ -26,7 +26,7 @@ function App() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setServerResponse(data.input);
+          setServerResponse(data.scrape);
           console.log(data);
         })
         .catch((error) => {
@@ -79,11 +79,9 @@ function App() {
           />
         </div>
       </form>
-      <h1>
-        {inputValue}
-      </h1>
-      <h1>
-        {serverResponse}
+      <h1 className = "text-center">
+        <a href = {serverResponse} target = "blank">Click Me</a>
+
       </h1>
     </div>
   );
