@@ -1,6 +1,7 @@
 # Import flask and datetime module for showing date and time
 from flask import Flask, request, jsonify
 import datetime
+import scraper
   
 x = datetime.datetime.now()
   
@@ -13,8 +14,11 @@ app = Flask(__name__)
 def inputs():
     data = request.get_json()
     input_data = data.get('input')
-    return (jsonify({'status': 'success', 'input':input_data}))
+    input_string = input_data.replace(" ", "+")
+    scrape_result = scraper.scrape_page(input_string)
+    return (jsonify({'status': 'success', 'input':input_data, 'scrape': scrape_result}))
     
+
 
 
 # Route for seeing a data
