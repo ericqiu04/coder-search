@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Typed from "typed.js";
 function App() {
   const [inputValue, setInputValue] = useState('')
-  const [serverResponse, setServerResponse] = useState('');
+  const [serverResponse, setServerResponse] = useState([]);
 
 
   const handleSubmit = (e) => {
@@ -71,12 +71,11 @@ function App() {
           />
         </div>
       </form>
-      <h1 className = "text-center">
-        <a href = {serverResponse} target = "blank">Click Me</a>
-      </h1>
-      <div className = "mt-20 p-10 mx-auto w-1/2 bg-gray-100 ">
-        {serverResponse}
-      </div>
+      {serverResponse.map((item, index) => (
+        <div className = "mt-20 p-10 mx-auto w-4/6 bg-gray-100 break-words">
+          <p dangerouslySetInnerHTML={{__html: item}}></p>
+        </div>
+      ))}
 
 
     </div>

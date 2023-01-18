@@ -16,7 +16,7 @@ def inputs():
     input_data = data.get('input')
     input_string = input_data.replace(" ", "+")
     scrape_result = scraper.scrape_page(input_string)
-    return jsonify({'status': 'success', 'input':input_string, 'scrape': scrape_result})
+    return jsonify({'status': 'success', 'input': '1', 'scrape': scrape_result})
     
 
 # Running app

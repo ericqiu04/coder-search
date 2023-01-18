@@ -1,5 +1,5 @@
 import scraper
 
-scrape_result = scraper.scrape_page("how to scrape with python")
+scrape_result = scraper.scrape_page("how to write hello world")
 
 print(scrape_result)
