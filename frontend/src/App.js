@@ -1,18 +1,10 @@
 // Importing modules
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
+import Typed from "typed.js";
 function App() {
   const [inputValue, setInputValue] = useState('')
   const [serverResponse, setServerResponse] = useState('');
 
-  // usestate for setting a javascript
-  // object for storing and using data
-  const [data, setdata] = useState({
-    name: "",
-    age: 0,
-    date: "",
-    programming: "",
-  });
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -81,8 +73,12 @@ function App() {
       </form>
       <h1 className = "text-center">
         <a href = {serverResponse} target = "blank">Click Me</a>
-
       </h1>
+      <div className = "mt-20 p-10 mx-auto w-1/2 bg-gray-100 ">
+        {serverResponse}
+      </div>
+
+
     </div>
   );
 }
